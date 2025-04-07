@@ -1,50 +1,43 @@
-# React + TypeScript + Vite
+# React Query
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Why react query?
 
-Currently, two official plugins are available:
+Access to hooks that have react state for data, loading, errors, etc. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Caching queries 
 
-## Expanding the ESLint configuration
+Handling stale data 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+performance optimizations 
 
-- Configure the top-level `parserOptions` property like this:
+Page focus re fetching
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Query options →
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+We need to provide various query options for react query. 
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+queryKey → It takes an array of “the query name”, and parameters to track for the query function.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+queryFn(function) →  It takes in a query function (callback) that returns the data through an asynchronous operation. 
+
+enabled: Boolean → Enable or disable the auto re fetching of the query. 
+
+These are just basic options. There are many more options available in the docs. 
+
+### Query results →
+
+data → The data returned by the query function. 
+
+isPending → The Boolean that tracks the loading state of the query. 
+
+refetch → A function to manually re fetch the query. 
+
+error → The error state for the query. 
+
+These are just the basic results we get from the query hook. There are a lot more options available inside docs.
+
+We can run multiple queries using useQueries hook. 
+
+Suspense Query → 
+
+We can get only the data instead of allowing an undefined using the useSuspenseQuery hook.
