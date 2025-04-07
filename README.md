@@ -12,35 +12,26 @@ performance optimizations
 
 Page focus re fetching
 
-### Query options →
+# `useQuery` Hook Summary
 
-We need to provide various query options for react query. 
+The `useQuery` hook, a core feature of libraries like TanStack Query and Apollo Client, simplifies **fetching, caching, and synchronizing server-side data** (Read operations) in your application.
 
-queryKey → It takes an array of “the query name”, and parameters to track for the query function.
+**Key Uses & Features:**
 
-queryFn(function) →  It takes in a query function (callback) that returns the data through an asynchronous operation. 
+* **Declarative Data Fetching:** You declare *what* data you need (using a query key and a fetcher function), and the hook handles *when* and *how* to fetch it.
+* **Automatic Fetching:** Typically fetches data automatically when the component mounts, dependencies change, or the window is refocused.
+* **Manages State:** Automatically tracks the query's status:
+    * `isLoading`: True during the *initial* data load (no cached data available).
+    * `isFetching`: True whenever *any* fetch is in progress (including background re fetches).
+    * `isSuccess`: True when data has been successfully fetched.
+    * `isError`: True if the data fetch failed.
+    * `error`: Contains the error object on failure.
+    * `data`: Holds the successfully fetched data.
+* **Caching:** Automatically caches query results in memory. Subsequent requests for the same data (identified by the query key) can return cached data instantly, improving performance.
+* **Background Updates & Stale-While-Revalidate:** Can show cached ("stale") data immediately while automatically re-fetching fresh data in the background, keeping the UI responsive and eventually consistent.
+* **Reduces Boilerplate:** Abstracts away manual `Workspace`/`axios` calls, state management for loading/error states, caching logic, and re-fetching strategies.
 
-enabled: Boolean → Enable or disable the auto re fetching of the query. 
-
-These are just basic options. There are many more options available in the docs. 
-
-### Query results →
-
-data → The data returned by the query function. 
-
-isPending → The Boolean that tracks the loading state of the query. 
-
-refetch → A function to manually re fetch the query. 
-
-error → The error state for the query. 
-
-These are just the basic results we get from the query hook. There are a lot more options available inside docs.
-
-We can run multiple queries using useQueries hook. 
-
-Suspense Query → 
-
-We can get only the data instead of allowing an undefined using the useSuspenseQuery hook.
+In essence, `useQuery` provides a robust and efficient way to manage asynchronous data fetching, handle loading/error states, leverage caching, and keep your UI synchronized with server data with minimal effort.
 
 # `useMutation` Hook: 
 
